@@ -1,3 +1,8 @@
+CREATE ROLE Brian_Irons LOGIN SUPERUSER
+NOCREATEDB CREATEROLE INHERIT PASSWORD '2236';
+
+ALTER ROLE brian_irons CREATEDB;
+
 CREATE DATABASE "RPDMS"
     WITH 
     OWNER = rpdadm
@@ -18,16 +23,12 @@ CREATE TABLE Policial (
 	raca VARCHAR(10) NOT NULL,
 	genero CHAR,
 	tipoSanguineo VARCHAR(3),
-	estadoCivil VARCHAR(10),
 	endereco VARCHAR(50),
-	salario REAL NOT NULL,
-	condicao VARCHAR(15) NOT NULL,
 	divisao VARCHAR(12) NOT NULL,
 	patente VARCHAR(20) NOT NULL,
 	formacao VARCHAR(60) NOT NULL,
-	especialidade VARCHAR(30),
+	especialidade VARCHAR(100),
 	PRIMARY KEY (policialID),
-	UNIQUE (policialID)
 );
   
 CREATE SEQUENCE civil_ID
@@ -47,9 +48,9 @@ CREATE TABLE Civil (
 	estadoCivil VARCHAR(10),
 	endereco VARCHAR(50),
 	condicao VARCHAR(15) NOT NULL,
-	antecedentes BOOLEAN,
+	antecedente INT,
 	PRIMARY KEY (civilID),
-	UNIQUE (civilID)
+	FOREIGN KEY (antecedente) REFERENCES Suspeito(suspeitoID)
 );
 
 CREATE TABLE Suspeito (
@@ -58,7 +59,6 @@ CREATE TABLE Suspeito (
   cela VARCHAR(20),
   PRIMARY KEY (suspeitoID),
   FOREIGN KEY (suspeitoID) REFERENCES Civil(civilID),
-  UNIQUE (suspeitoID)
 );
 
 CREATE TABLE Prioridade (
