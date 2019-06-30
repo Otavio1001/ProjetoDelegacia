@@ -28,6 +28,8 @@ CREATE TABLE Policial (
 	patente VARCHAR(20) NOT NULL,
 	formacao VARCHAR(60) NOT NULL,
 	especialidade VARCHAR(100),
+	login VARCHAR(10),
+	senha VARCHAR(15),
 	PRIMARY KEY (policialID),
 );
   
